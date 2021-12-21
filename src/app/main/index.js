@@ -13,13 +13,14 @@ function Main() {
   // Загрузка тестовых данных при первом рендере
   useInit(async () => {
     await store.catalog.initParams();
-  }, [], {backForward: true});
+    await store.categories.setCategories();
+  }, [], { backForward: true });
 
   return (
     <Layout head={<h1>Магазин</h1>}>
-      <Header/>
-      <CatalogFilter/>
-      <CatalogList/>
+      <Header />
+      <CatalogFilter />
+      <CatalogList />
     </Layout>
   );
 }

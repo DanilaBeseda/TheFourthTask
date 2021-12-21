@@ -60,7 +60,7 @@ class Store {
    * @param name {String} Название модуля
    * @return {StoreModule}
    */
-  get(name){
+  get(name) {
     return this.modules[name];
   }
 
@@ -68,22 +68,26 @@ class Store {
   /**
    * @return {BasketStore}
    */
-  get basket(){
+  get basket() {
     return this.get('basket');
   }
 
   /**
    * @return {ModalsStore}
    */
-  get modals(){
+  get modals() {
     return this.get('modals');
   }
 
   /**
    * @return {CatalogStore}
    */
-  get catalog(){
+  get catalog() {
     return this.get('catalog');
+  }
+
+  get categories() {
+    return this.get('categories');
   }
 }
 
