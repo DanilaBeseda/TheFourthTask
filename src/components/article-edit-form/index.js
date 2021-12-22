@@ -12,8 +12,6 @@ function ArticleEditForm({ article, countries, categories, pushToServer }) {
     setData({ ...data, [e.target.name]: e.target.value })
   }
 
-  console.log(data)
-
   const onSelectHandler = (e) => {
     let arr
     switch (e.target.name) {
