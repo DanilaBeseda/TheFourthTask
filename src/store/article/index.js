@@ -15,7 +15,7 @@ class ArticleStore extends StoreModule {
   /**
    * Загрузка списка товаров
    */
-  async load(id){
+  async load(id) {
 
     this.updateState({
       waiting: true,
@@ -32,9 +32,35 @@ class ArticleStore extends StoreModule {
         waiting: false
       });
 
-    } catch (e){
+    } catch (e) {
       this.updateState({
         data: {},
+        waiting: false
+      });
+    }
+  }
+
+  async pushToServer(data) {
+    this.updateState({
+      ...this.getState(),
+      waiting: true
+    })
+
+    try {
+      const response = await fetch(`/api/v1/articles/${data._id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ title: data.title }),
+        header: { 'Content-Type': 'application/json' }
+      })
+      const json = await response.json()
+
+      this.updateState({
+        ...this.getState(),
+        waiting: false
+      });
+    } catch (e) {
+      this.updateState({
+        ...this.getState(),
         waiting: false
       });
     }

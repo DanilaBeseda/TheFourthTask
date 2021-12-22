@@ -3,34 +3,49 @@ import StoreModule from "../module";
 class CategoriesStore extends StoreModule {
   initState() {
     return {
+      waiting: false,
       categories: []
     };
   }
 
   async setCategories() {
-    const response = await fetch(`/api/v1/categories?limit=*&fields=_id,parent,title`);
-    const { result } = await response.json();
-    const tree = this.createTree(result.items)
-    const categories = []
+    this.updateState({
+      categories: [],
+      waiting: true
+    });
 
-    runTree(categories, tree)
+    try {
+      const response = await fetch(`/api/v1/categories?limit=*&fields=_id,parent,title`);
+      const { result } = await response.json();
+      /* const tree = this.createTree(result.items)
+      const categories = []
 
-    function runTree(arr, data) {
-      Object.values(data).forEach(item => {
-        arr.push(item)
+      runTree(categories, tree)
 
-        if (item.children) {
-          runTree(arr, item.children)
-        }
-      })
+      function runTree(arr, data) {
+        Object.values(data).forEach(item => {
+          arr.push(item)
+
+          if (item.children) {
+            runTree(arr, item.children)
+          }
+        })
+      } */
+
+      this.updateState({
+        categories: result.items,
+        waiting: false
+      });
+    } catch (e) {
+      this.updateState({
+        categories: [],
+        waiting: false
+      });
     }
 
-    this.setState({
-      categories
-    })
   }
 
-  createTree(data) {
+  /* createTree(data) {
     const obj = {}
     const newObj = {}
 
@@ -47,7 +62,7 @@ class CategoriesStore extends StoreModule {
     })
 
     return newObj
-  }
+  } */
 }
 
 export default CategoriesStore

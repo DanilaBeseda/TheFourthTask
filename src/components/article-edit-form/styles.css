@@ -1,0 +1,22 @@
+.ArticleEditForm {
+  padding: 20px 35px;
+}
+
+.ArticleEditForm div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.ArticleEditForm input {
+  max-width: 300px;
+}
+
+.ArticleEditForm select {
+  max-width: 250px;
+}
+
+.ArticleEditForm textarea {
+  min-height: 120px;
+  max-width: 100%;
+}

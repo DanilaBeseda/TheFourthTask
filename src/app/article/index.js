@@ -1,8 +1,8 @@
-import React, {useCallback} from "react";
+import React, { useCallback } from "react";
 import Layout from "../../components/layout";
 import useStore from "../../utils/use-store";
 import useSelector from "../../utils/use-selector";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Spinner from "../../components/spinner";
 import ArticleCard from "../../components/article-card";
 import Header from "../../containers/header";
@@ -21,7 +21,7 @@ function Article() {
 
   const select = useSelector(state => ({
     article: state.article.data,
-    waiting: state.article.waiting,
+    waiting: [state.article.waiting],
   }));
 
   const callbacks = {
@@ -31,10 +31,10 @@ function Article() {
   return (
     <Layout head={<h1>{select.article.title}</h1>}>
 
-      <Header/>
+      <Header />
 
-      <Spinner active={select.waiting}>
-        <ArticleCard article={select.article} onAdd={callbacks.addToBasket}/>
+      <Spinner arrOfWaiting={select.waiting}>
+        <ArticleCard article={select.article} onAdd={callbacks.addToBasket} />
       </Spinner>
     </Layout>
   );

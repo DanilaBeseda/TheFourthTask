@@ -1,16 +1,18 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import {cn} from '@bem-react/classname'
+import { cn } from '@bem-react/classname'
 import './styles.css';
 import numberFormat from "../../utils/number-format";
+import { Link } from 'react-router-dom'
 
-function ArticleCard({article, onAdd}) {
+function ArticleCard({ article, onAdd }) {
 
   // CSS классы по БЭМ
   const className = cn('ArticleCard');
 
   return (
     <div className={className()}>
+      <Link to={'edit'}>Редактировать</Link>
       <div className={className('Description')}>{article.description}</div>
       <div className={className('Prop')}>
         <div className={className('Label')}>Страна производитель:</div>
@@ -27,7 +29,7 @@ function ArticleCard({article, onAdd}) {
         <div className={className('Value')}>{article.edition}</div>
       </div>
 
-      <div className={className('Prop', {size: 'big'})}>
+      <div className={className('Prop', { size: 'big' })}>
         <div className={className('Label')}>Цена:</div>
         <div className={className('Value')}>{numberFormat(article.price)} ₽</div>
       </div>
@@ -44,7 +46,7 @@ ArticleCard.propTypes = {
 
 ArticleCard.defaultProps = {
   article: {},
-  onAdd: () => {}
+  onAdd: () => { }
 }
 
 export default React.memo(ArticleCard);

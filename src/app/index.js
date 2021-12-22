@@ -1,9 +1,10 @@
 import React from 'react';
-import {Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Main from "./main";
 import Basket from "./basket";
 import useSelector from "../utils/use-selector";
 import Article from "./article";
+import ArticleEdit from './article-edit';
 
 /**
  * Приложение
@@ -17,10 +18,11 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path={''} element={<Main/>}/>
-        <Route path={"/articles/:id"} element={<Article/>}/>
+        <Route path={''} element={<Main />} />
+        <Route path={"/articles/:id"} element={<Article />} />
+        <Route path={"/articles/:id/edit"} element={<ArticleEdit />} />
       </Routes>
-      {select.name === 'basket' && <Basket/>}
+      {select.name === 'basket' && <Basket />}
     </>
   );
 }

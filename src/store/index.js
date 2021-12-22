@@ -89,6 +89,14 @@ class Store {
   get categories() {
     return this.get('categories');
   }
+
+  get countries() {
+    return this.get('countries')
+  }
+
+  get article() {
+    return this.get('article')
+  }
 }
 
 export default Store;
