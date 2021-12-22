@@ -53,11 +53,7 @@ class ArticleStore extends StoreModule {
         headers: { 'Content-Type': 'application/json' }
       })
       const json = await response.json()
-
-      this.updateState({
-        ...this.getState(),
-        waiting: false
-      });
+      this.load(data._id)
     } catch (e) {
       this.updateState({
         ...this.getState(),

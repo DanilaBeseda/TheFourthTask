@@ -15,8 +15,8 @@ function ArticleEdit() {
 
   useInit(async () => {
     await store.get('article').load(params.id);
-    await store.countries.setCountries()
-    await store.categories.setCategories();
+    await store.get('countries').load();
+    await store.get('categories').load();
   }, [params.id]);
 
   const select = useSelector(state => ({

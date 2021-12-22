@@ -8,7 +8,7 @@ class EditionStore extends StoreModule {
     };
   }
 
-  async setCountries() {
+  async load() {
     this.updateState({
       waiting: true,
       countries: []

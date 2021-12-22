@@ -12,6 +12,8 @@ function ArticleEditForm({ article, countries, categories, pushToServer }) {
     setData({ ...data, [e.target.name]: e.target.value })
   }
 
+  console.log(data)
+
   const onSelectHandler = (e) => {
     let arr
     switch (e.target.name) {
@@ -24,7 +26,7 @@ function ArticleEditForm({ article, countries, categories, pushToServer }) {
     }
 
     const item = arr.find(item => item.title === e.target.value)
-    setData({ ...data, [e.target.name]: item })
+    setData({ ...data, [e.target.name]: { ...item, title: item.title.replace(/-\s/gm, '') } })
   }
 
   const onSubmitHandler = (e) => {
@@ -67,7 +69,7 @@ function ArticleEditForm({ article, countries, categories, pushToServer }) {
 
       <div className={className('category')}>
         <label htmlFor='category'>Категория</label>
-        <select id='category' value={data.category?.title} name='category' onChange={onSelectHandler}>
+        <select id='category' value={categories.find(item => item.title.replace(/-\s/gm, '') === data.category?.title)?.title} name='category' onChange={onSelectHandler}>
           {categories.map(item => (
             <option key={item._id}>{item.title}</option>
           ))}

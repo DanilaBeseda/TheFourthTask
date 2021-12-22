@@ -1,14 +1,15 @@
+import { arrayOf } from "prop-types";
 import StoreModule from "../module";
 
 class CategoriesStore extends StoreModule {
   initState() {
     return {
       waiting: false,
-      categories: []
+      categories: [],
     };
   }
 
-  async setCategories() {
+  async load() {
     this.updateState({
       categories: [],
       waiting: true
@@ -17,23 +18,27 @@ class CategoriesStore extends StoreModule {
     try {
       const response = await fetch(`/api/v1/categories?limit=*&fields=_id,parent,title`);
       const { result } = await response.json();
-      /* const tree = this.createTree(result.items)
-      const categories = []
+      const sortItems = []
 
-      runTree(categories, tree)
+      sortCategories(sortItems, result.items)
 
-      function runTree(arr, data) {
-        Object.values(data).forEach(item => {
-          arr.push(item)
+      function sortCategories(arr, items, parentId = null, prefixCount = 0) {
+        for (let item of items) {
+          if (item.parent === parentId || item.parent?._id === parentId) {
+            const data = { ...item }
 
-          if (item.children) {
-            runTree(arr, item.children)
+            if (prefixCount) {
+              data.title = '- '.repeat(prefixCount) + data.title
+            }
+
+            arr.push(data)
+            sortCategories(arr, items, data._id, prefixCount + 1)
           }
-        })
-      } */
+        }
+      }
 
       this.updateState({
-        categories: result.items,
+        categories: sortItems,
         waiting: false
       });
     } catch (e) {
@@ -44,25 +49,6 @@ class CategoriesStore extends StoreModule {
     }
 
   }
-
-  /* createTree(data) {
-    const obj = {}
-    const newObj = {}
-
-    data.forEach(item => obj[item._id] = Object.assign({}, item))
-
-    Object.values(obj).forEach(item => {
-      if (item.parent === null) {
-        newObj[item._id] = item
-      } else {
-        const t = obj[item.parent._id]
-        t.children = t.children || {}
-        t.children[item._id] = item
-      }
-    })
-
-    return newObj
-  } */
 }
 
 export default CategoriesStore
