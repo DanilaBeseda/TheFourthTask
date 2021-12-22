@@ -8,7 +8,8 @@ class ArticleStore extends StoreModule {
   initState() {
     return {
       data: {},
-      waiting: true
+      waiting: true,
+      error: ''
     };
   }
 
@@ -19,7 +20,8 @@ class ArticleStore extends StoreModule {
 
     this.updateState({
       waiting: true,
-      data: {}
+      data: {},
+      error: ''
     });
 
     try {
@@ -42,7 +44,6 @@ class ArticleStore extends StoreModule {
 
   async pushToServer(data) {
     this.updateState({
-      ...this.getState(),
       waiting: true
     })
 
@@ -53,11 +54,14 @@ class ArticleStore extends StoreModule {
         headers: { 'Content-Type': 'application/json' }
       })
       const json = await response.json()
+      if (json.error) throw new Error(json.error.message);
+
       this.load(data._id)
     } catch (e) {
       this.updateState({
-        ...this.getState(),
-        waiting: false
+        data: {},
+        waiting: false,
+        error: e.message
       });
     }
   }

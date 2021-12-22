@@ -1,0 +1,21 @@
+.Error {
+  max-width: 90%;
+  min-width: 150px;
+  height: 150px;
+  border: 1px solid rgb(112, 112, 112);
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px 0 #bdbbbb;
+  background-color: #ededed;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Error-message {
+  padding: 20px 10px;
+  font-weight: 700;
+}

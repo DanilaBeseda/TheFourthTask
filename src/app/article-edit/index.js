@@ -7,6 +7,7 @@ import Spinner from "../../components/spinner";
 import Header from "../../containers/header";
 import { useParams } from 'react-router-dom';
 import useInit from '../../utils/use-init';
+import Error from '../../components/error';
 
 function ArticleEdit() {
   const store = useStore();
@@ -19,11 +20,13 @@ function ArticleEdit() {
     await store.get('categories').load();
   }, [params.id]);
 
+
   const select = useSelector(state => ({
     article: state.article.data,
     waiting: [state.article.waiting, state.countries.waiting, state.categories.waiting],
     countries: state.countries.countries,
-    categories: state.categories.categories
+    categories: state.categories.categories,
+    error: state.article.error
   }));
 
   const callbacks = {
@@ -37,6 +40,7 @@ function ArticleEdit() {
 
       <Spinner arrOfWaiting={select.waiting}>
         <ArticleEditForm article={select.article} countries={select.countries} categories={select.categories} pushToServer={callbacks.pushToServer} />
+        {select.error && <Error error={select.error} />}
       </Spinner>
     </Layout>
   );
