@@ -49,8 +49,8 @@ class ArticleStore extends StoreModule {
     try {
       const response = await fetch(`/api/v1/articles/${data._id}`, {
         method: 'PUT',
-        body: JSON.stringify({ title: data.title }),
-        header: { 'Content-Type': 'application/json' }
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
       })
       const json = await response.json()
 
