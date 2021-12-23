@@ -3,9 +3,9 @@ import propTypes from "prop-types";
 import './styles.css';
 import PropTypes from "prop-types";
 
-function Spinner({ arrOfWaiting, children }) {
+function Spinner({ active, children }) {
 
-  if (arrOfWaiting.find(active => active === true)) {
+  if (active) {
     return (
       <div className="Spinner">
         {children}
@@ -17,7 +17,7 @@ function Spinner({ arrOfWaiting, children }) {
 }
 
 Spinner.propTypes = {
-  arrOfWaiting: propTypes.arrayOf(propTypes.bool).isRequired,
+  active: propTypes.bool.isRequired,
   children: PropTypes.node,
 }
 

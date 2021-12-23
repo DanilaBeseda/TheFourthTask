@@ -13,7 +13,7 @@ function CatalogList() {
     page: state.catalog.params.page,
     limit: state.catalog.params.limit,
     count: state.catalog.count,
-    waiting: [state.catalog.waiting],
+    waiting: state.catalog.waiting,
   }));
 
   const store = useStore();
@@ -31,7 +31,7 @@ function CatalogList() {
 
   return (
     <>
-      <Spinner arrOfWaiting={select.waiting}>
+      <Spinner active={select.waiting}>
         <List items={select.items} renderItem={renders.item} />
       </Spinner>
       <Pagination

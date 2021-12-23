@@ -21,7 +21,7 @@ function Article() {
 
   const select = useSelector(state => ({
     article: state.article.data,
-    waiting: [state.article.waiting],
+    waiting: state.article.waiting,
   }));
 
   const callbacks = {
@@ -33,7 +33,7 @@ function Article() {
 
       <Header />
 
-      <Spinner arrOfWaiting={select.waiting}>
+      <Spinner active={select.waiting}>
         <ArticleCard article={select.article} onAdd={callbacks.addToBasket} />
       </Spinner>
     </Layout>

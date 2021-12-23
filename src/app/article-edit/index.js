@@ -23,7 +23,7 @@ function ArticleEdit() {
 
   const select = useSelector(state => ({
     article: state.article.data,
-    waiting: [state.article.waiting, state.countries.waiting, state.categories.waiting],
+    waiting: state.article.waiting || state.countries.waiting || state.categories.waiting,
     countries: state.countries.countries,
     categories: state.categories.categories,
     error: state.article.error
@@ -38,8 +38,8 @@ function ArticleEdit() {
 
       <Header />
 
-      <Spinner arrOfWaiting={select.waiting}>
-        <ArticleEditForm article={select.article} countries={select.countries} categories={select.categories} pushToServer={callbacks.pushToServer} />
+      <Spinner active={select.waiting}>
+        <ArticleEditForm article={select.article} countries={select.countries} categories={select.categories} onSubmit={callbacks.pushToServer} />
         {select.error && <Error error={select.error} />}
       </Spinner>
     </Layout>

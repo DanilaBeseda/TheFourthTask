@@ -3,7 +3,7 @@ import propTypes from 'prop-types'
 import { cn } from '@bem-react/classname'
 import './styles.css'
 
-function ArticleEditForm({ article, countries, categories, pushToServer }) {
+function ArticleEditForm({ article, countries, categories, onSubmit }) {
   const [data, setData] = useState(article)
 
   const className = cn('ArticleEditForm');
@@ -28,7 +28,7 @@ function ArticleEditForm({ article, countries, categories, pushToServer }) {
   }
 
   const onSubmitHandler = (e) => {
-    pushToServer(data)
+    onSubmit(data)
     e.preventDefault()
   }
 
@@ -105,14 +105,14 @@ ArticleEditForm.propTypes = {
   article: propTypes.object,
   countries: propTypes.arrayOf(propTypes.object),
   categories: propTypes.arrayOf(propTypes.object),
-  pushToServer: propTypes.func
+  onSubmit: propTypes.func
 }
 
 ArticleEditForm.defaultProps = {
   article: {},
   countries: [],
   categories: [],
-  pushToServer: () => { }
+  onSubmit: () => { }
 }
 
 export default React.memo(ArticleEditForm)
