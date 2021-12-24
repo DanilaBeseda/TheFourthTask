@@ -1,9 +1,10 @@
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 import propTypes from "prop-types";
-import {cn} from '@bem-react/classname'
+import { cn } from '@bem-react/classname'
 import './styles.css';
 
 function Pagination(props) {
+  console.log('pagination')
 
   // Количество станиц
   const length = Math.ceil(props.count / Math.max(1, props.limit));
@@ -14,7 +15,7 @@ function Pagination(props) {
   let items = [];
 
   // Первая страница всегда нужна
-  if (start > 1){
+  if (start > 1) {
     items.push(1);
     if (start > 2) items.push(null); // пропуск
   }
@@ -23,7 +24,7 @@ function Pagination(props) {
   for (let page = start; page <= end; page++) items.push(page)
 
   // Последнаяя страница
-  if (end < length){
+  if (end < length) {
     if (end < length - 1) items.push(null); // пропуск
     items.push(length);
   }
@@ -40,8 +41,8 @@ function Pagination(props) {
     <ul className={className()}>
       {items.map((number, index) => (
         <li key={index}
-            className={className('item', {active: number === props.page, split: !number})}
-            onClick={onClickHandler(number)}
+          className={className('item', { active: number === props.page, split: !number })}
+          onClick={onClickHandler(number)}
         >
           {number || '...'}
         </li>

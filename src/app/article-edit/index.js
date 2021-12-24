@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react'
-import ArticleEditForm from '../../components/article-edit-form';
+import ArticleEditForm from '../../containers/article-edit-form';
 import Layout from "../../components/layout";
 import useStore from "../../utils/use-store";
 import useSelector from "../../utils/use-selector";
@@ -39,7 +39,7 @@ function ArticleEdit() {
       <Header />
 
       <Spinner active={select.waiting}>
-        <ArticleEditForm article={select.article} countries={select.countries} categories={select.categories} onSubmit={callbacks.pushToServer} />
+        <ArticleEditForm article={select.article} maidIn={select.countries} category={select.categories} onSubmit={callbacks.pushToServer} />
         {select.error && <Error error={select.error} />}
       </Spinner>
     </Layout>

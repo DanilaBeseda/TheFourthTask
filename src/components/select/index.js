@@ -1,21 +1,21 @@
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 import propTypes from "prop-types";
-import {cn} from '@bem-react/classname'
+import { cn } from '@bem-react/classname'
 import './styles.css';
 
-function Select(props){
+function Select(props) {
 
   // CSS классы по БЭМ
   const className = cn('Select');
 
   const onSelect = useCallback((e) => {
-    props.onChange(e.target.value);
+    props.name ? props.onChange(e) : props.onChange(e.target.value)
   }, [props.onChange])
 
   return (
-    <select className={className()} onChange={onSelect} value={props.value}>
+    <select className={className()} onChange={onSelect} name={props.name || 'sort'} value={props.value}>
       {props.options.map(item => (
-        <option key={item.value} value={item.value}>{item.title}</option>
+        <option key={item._id} >{item.title}</option>
       ))}
     </select>
   )
@@ -24,12 +24,13 @@ function Select(props){
 Select.propTypes = {
   options: propTypes.arrayOf(propTypes.object).isRequired,
   value: propTypes.any,
-  onChange: propTypes.func
+  onChange: propTypes.func,
+  name: propTypes.string
 }
 
 Select.defaultProps = {
-  onChange: () => {
-  }
+  onChange: () => { },
+  name: ''
 }
 
 export default React.memo(Select);

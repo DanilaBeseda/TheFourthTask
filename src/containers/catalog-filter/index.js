@@ -20,10 +20,10 @@ function CatalogFilter() {
   // Опции для полей
   const options = {
     sort: useMemo(() => ([
-      { value: 'key', title: 'По коду' },
-      { value: 'title.ru', title: 'По именованию' },
-      { value: '-price', title: 'Сначала дорогие' },
-      { value: 'edition', title: 'Древние' },
+      { _id: 'key', title: 'По коду' },
+      { _id: 'title.ru', title: 'По именованию' },
+      { _id: '-price', title: 'Сначала дорогие' },
+      { _id: 'edition', title: 'Древние' },
     ]), [])
   }
 
@@ -37,7 +37,7 @@ function CatalogFilter() {
   return (
     <LayoutTools>
       <Categories onChange={callbacks.onChangeCategory} categories={select.categories} value={select.category} />
-      <Input onChange={callbacks.onSearch} value={select.query} placeholder={'Поиск'} theme="big" />
+      <Input onChange={callbacks.onSearch} value={select.query} placeholder={'Поиск'} theme="big" delay />
       <label>Сортировка:</label>
       <Select onChange={callbacks.onSort} value={select.sort} options={options.sort} />
       <button onClick={callbacks.onReset}>Сбросить</button>
