@@ -46,7 +46,6 @@ class ArticleStore extends StoreModule {
     this.updateState({
       waiting: true
     })
-    console.log(this.getState().data)
     try {
       const response = await fetch(`/api/v1/articles/${this.getState().data._id}`, {
         method: 'PUT',
