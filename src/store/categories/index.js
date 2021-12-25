@@ -1,17 +1,16 @@
-import { arrayOf } from "prop-types";
 import StoreModule from "../module";
 
 class CategoriesStore extends StoreModule {
   initState() {
     return {
       waiting: false,
-      categories: [],
+      data: [],
     };
   }
 
   async load() {
     this.updateState({
-      categories: [],
+      data: [],
       waiting: true
     });
 
@@ -38,12 +37,12 @@ class CategoriesStore extends StoreModule {
       }
 
       this.updateState({
-        categories: sortItems,
+        data: sortItems,
         waiting: false
       });
     } catch (e) {
       this.updateState({
-        categories: [],
+        data: [],
         waiting: false
       });
     }

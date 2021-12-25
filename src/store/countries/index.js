@@ -3,15 +3,15 @@ import StoreModule from "../module";
 class EditionStore extends StoreModule {
   initState() {
     return {
-      waiting: false,
-      countries: []
+      data: [],
+      waiting: false
     };
   }
 
   async load() {
     this.updateState({
-      waiting: true,
-      countries: []
+      data: [],
+      waiting: true
     });
 
     try {
@@ -19,13 +19,13 @@ class EditionStore extends StoreModule {
       const { result } = await response.json()
 
       this.updateState({
-        countries: result.items,
+        data: result.items,
         waiting: false
       });
     }
     catch (e) {
       this.updateState({
-        countries: [],
+        data: [],
         waiting: false
       });
     }

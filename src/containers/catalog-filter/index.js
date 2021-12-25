@@ -13,7 +13,7 @@ function CatalogFilter() {
   const select = useSelector(state => ({
     sort: state.catalog.params.sort,
     query: state.catalog.params.query,
-    categories: state.categories.categories,
+    categories: state.categories.data,
     category: state.catalog.params.category,
   }));
 

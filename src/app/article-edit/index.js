@@ -24,8 +24,8 @@ function ArticleEdit() {
   const select = useSelector(state => ({
     article: state.article.data,
     waiting: state.article.waiting || state.countries.waiting || state.categories.waiting,
-    countries: state.countries.countries,
-    categories: state.categories.categories,
+    countries: state.countries.data,
+    categories: state.categories.data,
     error: state.article.error
   }));
 
