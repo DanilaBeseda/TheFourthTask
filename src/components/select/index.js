@@ -9,7 +9,9 @@ function Select(props) {
   const className = cn('Select');
 
   const onSelect = useCallback((e) => {
-    props.name ? props.onChange(e) : props.onChange(e.target.value)
+    props.name
+      ? props.onChange(e, props.options.find(item => item.title === e.target.value))
+      : props.onChange(e.target.value)
   }, [props.onChange])
 
   return (

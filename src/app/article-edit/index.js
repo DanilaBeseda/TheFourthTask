@@ -41,7 +41,7 @@ function ArticleEdit() {
       <Header />
 
       <Spinner active={select.waiting}>
-        <ArticleEditForm article={select.article} maidIn={select.countries} category={select.categories} onSubmit={callbacks.pushToServer} />
+        <ArticleEditForm />
         {select.error && <Error error={select.error} />}
       </Spinner>
     </Layout>

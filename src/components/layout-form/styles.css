@@ -1,12 +1,12 @@
-.ArticleEditForm {
+.LayoutForm {
   padding: 20px 35px;
 }
 
-.ArticleEditForm-item {
+.LayoutForm-item {
   margin-bottom: 20px;
 }
 
-.ArticleEditForm textarea {
+.LayoutForm textarea {
   min-height: 120px;
   min-width: 100%;
 }

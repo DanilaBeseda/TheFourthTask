@@ -42,27 +42,41 @@ class ArticleStore extends StoreModule {
     }
   }
 
-  async pushToServer(data) {
+  async pushToServer() {
     this.updateState({
       waiting: true
     })
-
+    console.log(this.getState().data)
     try {
-      const response = await fetch(`/api/v1/articles/${data._id}`, {
+      const response = await fetch(`/api/v1/articles/${this.getState().data._id}`, {
         method: 'PUT',
-        body: JSON.stringify(data),
+        body: JSON.stringify(this.getState().data),
         headers: { 'Content-Type': 'application/json' }
       })
       const json = await response.json()
       if (json.error) throw new Error(json.error.message);
 
-      this.load(data._id)
+      this.updateState({
+        waiting: false
+      })
     } catch (e) {
       this.updateState({
         data: {},
         waiting: false,
         error: e.message
       });
+    }
+  }
+
+  setArticle(e, item = null) {
+    if (item) {
+      this.updateState({
+        data: { ...this.getState().data, [e.target.name]: { ...item, title: item.title.replace(/-\s/gm, '') } }
+      })
+    } else {
+      this.updateState({
+        data: { ...this.getState().data, [e.target.name]: e.target.value }
+      })
     }
   }
 }

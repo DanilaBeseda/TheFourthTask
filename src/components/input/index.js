@@ -18,11 +18,6 @@ function Input(props) {
     props.delay ? changeThrottle(e.target.value) : props.onChange(e)
   }, [change, changeThrottle]);
 
-  // Обновление стейта, если передан новый value
-  useEffect(() => {
-    change(props.value);
-  }, [props.value]);
-
   // CSS классы по БЭМ
   const className = cn('Input');
 
