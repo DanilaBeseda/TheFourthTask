@@ -14,10 +14,12 @@ function ArticleEdit() {
 
   const params = useParams();
 
-  useInit(async () => {
-    await store.get('article').load(params.id);
-    await store.get('countries').load();
-    await store.get('categories').load();
+  useInit(() => {
+    Promise.allSettled([
+      store.get('article').load(params.id),
+      store.get('countries').load(),
+      store.get('categories').load(),
+    ])
   }, [params.id]);
 
 
