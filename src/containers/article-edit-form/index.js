@@ -9,7 +9,7 @@ function ArticleEditForm() {
   const store = useStore()
 
   const select = useSelector(state => ({
-    article: state.article.data,
+    article: state.article.form,
     maidIn: state.countries.data,
     category: state.categories.data
   }))

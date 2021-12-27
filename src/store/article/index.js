@@ -8,6 +8,7 @@ class ArticleStore extends StoreModule {
   initState() {
     return {
       data: {},
+      form: {},
       waiting: true,
       error: ''
     };
@@ -21,6 +22,7 @@ class ArticleStore extends StoreModule {
     this.updateState({
       waiting: true,
       data: {},
+      form: {},
       error: ''
     });
 
@@ -31,12 +33,14 @@ class ArticleStore extends StoreModule {
 
       this.updateState({
         data: json.result,
+        form: json.result,
         waiting: false
       });
 
     } catch (e) {
       this.updateState({
         data: {},
+        form: {},
         waiting: false
       });
     }
@@ -44,7 +48,8 @@ class ArticleStore extends StoreModule {
 
   async pushToServer() {
     this.updateState({
-      waiting: true
+      waiting: true,
+      data: this.getState().form
     })
     try {
       const response = await fetch(`/api/v1/articles/${this.getState().data._id}`, {
@@ -61,6 +66,7 @@ class ArticleStore extends StoreModule {
     } catch (e) {
       this.updateState({
         data: {},
+        form: {},
         waiting: false,
         error: e.message
       });
@@ -70,11 +76,11 @@ class ArticleStore extends StoreModule {
   setArticle(e, item = null) {
     if (item) {
       this.updateState({
-        data: { ...this.getState().data, [e.target.name]: { ...item, title: item.title.replace(/-\s/gm, '') } }
+        form: { ...this.getState().data, [e.target.name]: { ...item, title: item.title.replace(/-\s/gm, '') } }
       })
     } else {
       this.updateState({
-        data: { ...this.getState().data, [e.target.name]: e.target.value }
+        form: { ...this.getState().data, [e.target.name]: e.target.value }
       })
     }
   }
